@@ -11,7 +11,7 @@
 </head>
 <body>
   <h2>発送先情報</h2>
-  <form id="shippingForm" action="https://script.google.com/macros/s/AKfycbzdO3IHP8KfUW24bj_-TDEn_S4V462Yiu-nJXnFrsMFAzWNquM-anNSR-pMTRHZZCqPaQ/exec" method="POST">
+  <form id="shippingForm" action="PASTE_YOUR_SCRIPT_URL_HERE" method="POST">
     <div class="form-group">
       <label for="fullName">お名前 <span style="color:red;">*</span></label>
       <input id="fullName" name="fullName" type="text" required maxlength="50" placeholder="例：山田 太郎">
@@ -57,28 +57,4 @@
       </div>
     </div>
     <div class="form-group">
-      <label><input name="agree" type="checkbox" value="yes" required> <a href="/privacy" target="_blank">プライバシーポリシー</a>に同意する</label>
-    </div>
-    <button type="submit">送信する</button>
-  </form>
-  <script>
-    const productEl = document.getElementById('product');
-    const otherFields = document.getElementById('otherFields');
-    const requestText = document.getElementById('requestText');
-    const desiredPrice = document.getElementById('desiredPrice');
-    productEl.addEventListener('change', () => {
-      if (productEl.value === 'その他  次ページにて記載いただきます') {
-        otherFields.style.display = 'block';
-        requestText.setAttribute('required', 'required');
-        desiredPrice.setAttribute('required', 'required');
-      } else {
-        otherFields.style.display = 'none';
-        requestText.removeAttribute('required');
-        desiredPrice.removeAttribute('required');
-        requestText.value = '';
-        desiredPrice.value = '';
-      }
-    });
-  </script>
-</body>
-</html>
+      <label><input name="agree" type="checkbox" value="yes" required> <a href="/privacy" target="_blank">プライバシーポリシー</a>_
