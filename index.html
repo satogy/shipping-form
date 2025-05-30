@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>発送先フォーム</title>
+</head>
+<body>
+  <h2>発送先情報</h2>
+  <form id="shippingForm" action="https://script.google.com/macros/s/AKfycbzdO3IHP8KfUW24bj_-TDEn_S4V462Yiu-nJXnFrsMFAzWNquM-anNSR-pMTRHZZCqPaQ/exec" method="POST">
+    <input name="fullName" type="text" placeholder="お名前（漢字）" required><br>
+    <input name="kanaName" type="text" placeholder="お名前（フリガナ）" required><br>
+    <input name="postal" type="text" placeholder="郵便番号（123-4567）" required><br>
+    <input name="prefecture" type="text" placeholder="都道府県" required><br>
+    <input name="city" type="text" placeholder="市区町村・番地" required><br>
+    <input name="building" type="text" placeholder="建物名・部屋番号"><br>
+    <input name="phone" type="tel" placeholder="電話番号" required><br>
+    <label><input name="agree" type="checkbox" value="yes" required> プライバシーポリシーに同意する</label><br>
+    <button type="submit">送信する</button>
+  </form>
+  <script>
+    // （ここにクライアント側バリデーションや reCAPTCHA 取得ロジックを追加）
+  </script>
+</body>
+</html>
