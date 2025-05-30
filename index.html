@@ -11,50 +11,74 @@
 </head>
 <body>
   <h2>発送先情報</h2>
-  <form id="shippingForm" action="https://script.google.com/…/exec" method="POST">
-    <!-- 既存の項目（お名前、住所 etc.）は省略 -->
-<div class="form-group">
-  <label for="product">商品サイズ・価格 <span style="color:red;">*</span></label>
-  <select name="product" id="product" required>
-    <option value="">選択してください</option>
-    <option value="大 ￥5,000-(税込み) 送料別">大 ￥5,000-(税込み) 送料別</option>
-    <option value="中 ￥4,000-(税込み) 送料別">中 ￥4,000-(税込み) 送料別</option>
-    <option value="小 ￥3,000-(税込み) 送料別">小 ￥3,000-(税込み) 送料別</option>
-    <option value="その他">その他（次ページにて記載）</option>
-  </select>
-</div>
-
-<div id="otherFields" style="display:none; margin-left:1em;">
-  <div class="form-group">
-    <label for="requestText">ご要望・備考 <span style="color:red;">*</span></label>
-    <textarea name="requestText" id="requestText" rows="3" placeholder="ご要望を具体的にご記入ください"></textarea>
-  </div>
-  <div class="form-group">
-    <label for="desiredPrice">ご希望金額 <span style="color:red;">*</span></label>
-    <input type="number" name="desiredPrice" id="desiredPrice" placeholder="例：6000" /> 円
-  </div>
-</div>
-
-<script>
-  const productEl = document.getElementById('product');
-  const otherFields = document.getElementById('otherFields');
-  const requestText = document.getElementById('requestText');
-  const desiredPrice = document.getElementById('desiredPrice');
-
-  productEl.addEventListener('change', () => {
-    if (productEl.value === 'その他') {
-      otherFields.style.display = 'block';
-      requestText.setAttribute('required', 'required');
-      desiredPrice.setAttribute('required', 'required');
-    } else {
-      otherFields.style.display = 'none';
-      requestText.removeAttribute('required');
-      desiredPrice.removeAttribute('required');
-      requestText.value = '';
-      desiredPrice.value = '';
-    }
-  });
-</script>
-
-    </body>
+  <form id="shippingForm" action="https://script.google.com/macros/s/AKfycbzdO3IHP8KfUW24bj_-TDEn_S4V462Yiu-nJXnFrsMFAzWNquM-anNSR-pMTRHZZCqPaQ/exec" method="POST">
+    <div class="form-group">
+      <label for="fullName">お名前 <span style="color:red;">*</span></label>
+      <input id="fullName" name="fullName" type="text" required maxlength="50" placeholder="例：山田 太郎">
+    </div>
+    <div class="form-group">
+      <label for="postal">郵便番号 <span style="color:red;">*</span></label>
+      <input id="postal" name="postal" type="text" required pattern="^\d{3}-?\d{4}$" placeholder="例：123-4567">
+    </div>
+    <div class="form-group">
+      <label for="prefecture">都道府県 <span style="color:red;">*</span></label>
+      <input id="prefecture" name="prefecture" type="text" required placeholder="例：埼玉県">
+    </div>
+    <div class="form-group">
+      <label for="city">市区町村・番地 <span style="color:red;">*</span></label>
+      <input id="city" name="city" type="text" required placeholder="例：本庄市緑町1-2-3">
+    </div>
+    <div class="form-group">
+      <label for="building">建物名・部屋番号 <span class="small">(任意)</span></label>
+      <input id="building" name="building" type="text" maxlength="50" placeholder="例：サンプルマンション101号室">
+    </div>
+    <div class="form-group">
+      <label for="phone">電話番号 <span style="color:red;">*</span></label>
+      <input id="phone" name="phone" type="tel" required pattern="^\d{2,4}-?\d{2,4}-?\d{3,4}$" placeholder="例：0495-24-5678">
+    </div>
+    <div class="form-group">
+      <label for="product">商品サイズ・価格 <span style="color:red;">*</span></label>
+      <select name="product" id="product" required>
+        <option value="">選択してください</option>
+        <option value="大 ￥5,000-(税込み) 送料別">大 ￥5,000-(税込み) 送料別</option>
+        <option value="中 ￥4,000-(税込み) 送料別">中 ￥4,000-(税込み) 送料別</option>
+        <option value="小 ￥3,000-(税込み) 送料別">小 ￥3,000-(税込み) 送料別</option>
+        <option value="その他  次ページにて記載いただきます">その他  次ページにて記載いただきます</option>
+      </select>
+    </div>
+    <div id="otherFields">
+      <div class="form-group">
+        <label for="requestText">ご要望・備考 <span style="color:red;">*</span></label>
+        <textarea name="requestText" id="requestText" rows="3" placeholder="ご要望を具体的にご記入ください"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="desiredPrice">ご希望金額 <span style="color:red;">*</span></label>
+        <input type="number" name="desiredPrice" id="desiredPrice" placeholder="例：6000" /> 円
+      </div>
+    </div>
+    <div class="form-group">
+      <label><input name="agree" type="checkbox" value="yes" required> <a href="/privacy" target="_blank">プライバシーポリシー</a>に同意する</label>
+    </div>
+    <button type="submit">送信する</button>
+  </form>
+  <script>
+    const productEl = document.getElementById('product');
+    const otherFields = document.getElementById('otherFields');
+    const requestText = document.getElementById('requestText');
+    const desiredPrice = document.getElementById('desiredPrice');
+    productEl.addEventListener('change', () => {
+      if (productEl.value === 'その他  次ページにて記載いただきます') {
+        otherFields.style.display = 'block';
+        requestText.setAttribute('required', 'required');
+        desiredPrice.setAttribute('required', 'required');
+      } else {
+        otherFields.style.display = 'none';
+        requestText.removeAttribute('required');
+        desiredPrice.removeAttribute('required');
+        requestText.value = '';
+        desiredPrice.value = '';
+      }
+    });
+  </script>
+</body>
 </html>
