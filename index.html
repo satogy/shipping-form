@@ -11,31 +11,83 @@
 </head>
 <body>
   <h2>発送先情報</h2>
-  <form id="shippingForm" action="PASTE_YOUR_SCRIPT_URL_HERE" method="POST">
+  <form id="shippingForm" action="https://script.google.com/macros/s/AKfycbzdO3IHP8KfUW24bj_-TDEn_S4V462Yiu-nJXnFrsMFAzWNquM-anNSR-pMTRHZZCqPaQ/exec" method="POST">
+    <!-- お名前欄 -->
     <div class="form-group">
       <label for="fullName">お名前 <span style="color:red;">*</span></label>
-      <input id="fullName" name="fullName" type="text" required maxlength="50" placeholder="例：山田 太郎">
+      <input
+        id="fullName"
+        name="fullName"
+        type="text"
+        required
+        maxlength="50"
+        placeholder="例：山田 太郎"
+      >
     </div>
+
+    <!-- 郵便番号欄 -->
     <div class="form-group">
       <label for="postal">郵便番号 <span style="color:red;">*</span></label>
-      <input id="postal" name="postal" type="text" required pattern="^\d{3}-?\d{4}$" placeholder="例：123-4567">
+      <input
+        id="postal"
+        name="postal"
+        type="text"
+        required
+        pattern="^\d{3}-?\d{4}$"
+        placeholder="例：123-4567"
+      >
     </div>
+
+    <!-- 都道府県欄 -->
     <div class="form-group">
       <label for="prefecture">都道府県 <span style="color:red;">*</span></label>
-      <input id="prefecture" name="prefecture" type="text" required placeholder="例：埼玉県">
+      <input
+        id="prefecture"
+        name="prefecture"
+        type="text"
+        required
+        placeholder="例：埼玉県"
+      >
     </div>
+
+    <!-- 市区町村・番地欄 -->
     <div class="form-group">
       <label for="city">市区町村・番地 <span style="color:red;">*</span></label>
-      <input id="city" name="city" type="text" required placeholder="例：本庄市緑町1-2-3">
+      <input
+        id="city"
+        name="city"
+        type="text"
+        required
+        placeholder="例：本庄市緑町1-2-3"
+      >
     </div>
+
+    <!-- 建物名・部屋番号欄（任意） -->
     <div class="form-group">
       <label for="building">建物名・部屋番号 <span class="small">(任意)</span></label>
-      <input id="building" name="building" type="text" maxlength="50" placeholder="例：サンプルマンション101号室">
+      <input
+        id="building"
+        name="building"
+        type="text"
+        maxlength="50"
+        placeholder="例：サンプルマンション101号室"
+      >
     </div>
+
+    <!-- 電話番号欄 -->
     <div class="form-group">
       <label for="phone">電話番号 <span style="color:red;">*</span></label>
-      <input id="phone" name="phone" type="tel" required pattern="^\d{2,4}-?\d{2,4}-?\d{3,4}$" placeholder="例：0495-24-5678">
+      <input
+        id="phone"
+        name="phone"
+        type="tel"
+        required
+        pattern="^\d{2,4}-?\d{2,4}-?\d{3,4}$"
+        placeholder="例：0495-24-5678"
+      >
     </div>
+
+    <!-- 商品サイズ・価格選択 -->
     <div class="form-group">
       <label for="product">商品サイズ・価格 <span style="color:red;">*</span></label>
       <select name="product" id="product" required>
@@ -46,22 +98,46 @@
         <option value="その他  次ページにて記載いただきます">その他  次ページにて記載いただきます</option>
       </select>
     </div>
+
+    <!-- “その他”を選んだ場合のみ表示する要望・金額入力 -->
     <div id="otherFields">
       <div class="form-group">
         <label for="requestText">ご要望・備考 <span style="color:red;">*</span></label>
-        <textarea name="requestText" id="requestText" rows="3" placeholder="ご要望を具体的にご記入ください"></textarea>
+        <textarea
+          name="requestText"
+          id="requestText"
+          rows="3"
+          placeholder="ご要望を具体的にご記入ください"
+        ></textarea>
       </div>
       <div class="form-group">
         <label for="desiredPrice">ご希望金額 <span style="color:red;">*</span></label>
-        <input type="number" name="desiredPrice" id="desiredPrice" placeholder="例：6000" /> 円
+        <input
+          type="number"
+          name="desiredPrice"
+          id="desiredPrice"
+          placeholder="例：6000"
+        /> 円
       </div>
     </div>
-    <div class="form-group">
-  <label><input name="agree" type="checkbox" value="yes" required> <a href="privacy.html" target="_blank">プライバシーポリシー</a>に同意する</label>
-</div>
 
+    <!-- プライバシーポリシー同意チェックボックス -->
+    <div class="form-group">
+      <label>
+        <input
+          name="agree"
+          type="checkbox"
+          value="yes"
+          required
+        > 
+        <a href="privacy.html" target="_blank">プライバシーポリシー</a>に同意する
+      </label>
+    </div>
+
+    <!-- 送信ボタン -->
     <button type="submit">送信する</button>
   </form>
+
   <script>
     const productEl = document.getElementById('product');
     const otherFields = document.getElementById('otherFields');
