@@ -57,4 +57,28 @@
       </div>
     </div>
     <div class="form-group">
-      <label><input name="agree" type="checkbox" value="yes" required> <a href="/privacy" target="_blank">プライバシーポリシー</a>_
+   <label><input name="agree" type="checkbox" value="yes" required> <a href="privacy.html" target="_blank">プライバシーポリシー</a>に同意する</label>
+   </div>
+    <button type="submit">送信する</button>
+  </form>
+  <script>
+    const productEl = document.getElementById('product');
+    const otherFields = document.getElementById('otherFields');
+    const requestText = document.getElementById('requestText');
+    const desiredPrice = document.getElementById('desiredPrice');
+    productEl.addEventListener('change', () => {
+      if (productEl.value === 'その他  次ページにて記載いただきます') {
+        otherFields.style.display = 'block';
+        requestText.setAttribute('required', 'required');
+        desiredPrice.setAttribute('required', 'required');
+      } else {
+        otherFields.style.display = 'none';
+        requestText.removeAttribute('required');
+        desiredPrice.removeAttribute('required');
+        requestText.value = '';
+        desiredPrice.value = '';
+      }
+    });
+  </script>
+</body>
+</html>
