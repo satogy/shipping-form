@@ -144,7 +144,7 @@
     const requestText = document.getElementById('requestText');
     const desiredPrice = document.getElementById('desiredPrice');
     productEl.addEventListener('change', () => {
-      if (productEl.value === 'その他  次ページにて記載いただきます') {
+      if (productEl.value === 'その他') {
         otherFields.style.display = 'block';
         requestText.setAttribute('required', 'required');
         desiredPrice.setAttribute('required', 'required');
