@@ -11,7 +11,7 @@
 </head>
 <body>
   <h2>発送先情報</h2>
-  <form id="shippingForm" action="https://script.google.com/macros/s/AKfycbzdO3IHP8KfUW24bj_-TDEn_S4V462Yiu-nJXnFrsMFAzWNquM-anNSR-pMTRHZZCqPaQ/exec" method="POST">
+  <form id="shippingForm" action="PASTE_YOUR_SCRIPT_URL_HERE" method="POST">
     <!-- お名前欄 -->
     <div class="form-group">
       <label for="fullName">お名前 <span style="color:red;">*</span></label>
@@ -25,13 +25,14 @@
       >
     </div>
 
-    <!-- 郵便番号欄 -->
+    <!-- 郵便番号欄（ここを変更） -->
     <div class="form-group">
       <label for="postal">郵便番号 <span style="color:red;">*</span></label>
       <input
         id="postal"
         name="postal"
-        type="text"
+        type="tel"
+        inputmode="numeric"
         required
         pattern="^\d{3}-?\d{4}$"
         placeholder="例：123-4567"
@@ -117,6 +118,9 @@
           name="desiredPrice"
           id="desiredPrice"
           placeholder="例：6000"
+          inputmode="numeric"
+          step="1000"
+          min="0"
         /> 円
       </div>
     </div>
@@ -129,7 +133,7 @@
           type="checkbox"
           value="yes"
           required
-        > 
+        >
         <a href="privacy.html" target="_blank">プライバシーポリシー</a>に同意する
       </label>
     </div>
@@ -157,5 +161,11 @@
       }
     });
   </script>
+
+  <!-- お問い合わせ用メールアドレスの追加 -->
+  <div class="form-group">
+    <p>ご不明点・お問合せは以下のメールアドレスまでお願いいたします：</p>
+    <a href="mailto:info@seikounouen.com">info@seikounouen.com</a>
+  </div>
 </body>
 </html>
