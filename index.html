@@ -11,7 +11,7 @@
 </head>
 <body>
   <h2>発送先情報</h2>
-  <form id="shippingForm" action="PASTE_YOUR_SCRIPT_URL_HERE" method="POST">
+  <form id="shippingForm" action="https://script.google.com/macros/s/AKfycbyuKDSQ9Cr2Shf4aOWSHCC9fuhhfau8rv2iy-V794ZKc76LIAWvkBXHQAGtR8ajjI7z9Q/exec" method="POST">
     <!-- お名前欄 -->
     <div class="form-group">
       <label for="fullName">お名前 <span style="color:red;">*</span></label>
@@ -25,7 +25,7 @@
       >
     </div>
 
-    <!-- 郵便番号欄（ここを変更） -->
+    <!-- 郵便番号欄 -->
     <div class="form-group">
       <label for="postal">郵便番号 <span style="color:red;">*</span></label>
       <input
@@ -142,6 +142,7 @@
     <button type="submit">送信する</button>
   </form>
 
+  <!-- “その他”選択時の表示切り替えスクリプト -->
   <script>
     const productEl = document.getElementById('product');
     const otherFields = document.getElementById('otherFields');
@@ -159,6 +160,69 @@
         requestText.value = '';
         desiredPrice.value = '';
       }
+    });
+  </script>
+
+  <!-- 郵便番号自動入力（ZipCloud API）スクリプト -->
+  <script>
+    // 要素取得
+    const postalEl = document.getElementById('postal');
+    const prefectureEl = document.getElementById('prefecture');
+    const cityEl = document.getElementById('city');
+
+    /**
+     * 郵便番号を正規化して ZipCloud API へ問い合わせ、
+     * 結果を都道府県・市区町村欄に反映する関数
+     */
+    function lookupAddressByPostalCode() {
+      // 入力値取得とトリム
+      let zip = postalEl.value.trim();
+      if (!zip) {
+        // 空の場合は何もしない
+        return;
+      }
+      // ハイフンを除去し、数字以外を取り除く
+      zip = zip.replace(/\D/g, '');
+      // 7桁でない場合は処理しない
+      if (zip.length !== 7) {
+        return;
+      }
+      // ZipCloud API の URL を構築
+      const apiUrl = 'https://zipcloud.ibsnet.co.jp/api/search?zipcode=' + zip;
+      // fetch で API 呼び出し
+      fetch(apiUrl)
+        .then(function(response) {
+          // ステータスチェック
+          if (!response.ok) {
+            throw new Error('Network response was not ok: ' + response.status);
+          }
+          return response.json();
+        })
+        .then(function(data) {
+          // status が 200 かつ results 配列が存在するか確認
+          if (data.status !== 200 || !data.results) {
+            // 存在しない郵便番号などのケース
+            return;
+          }
+          // 複数行あれば先頭の結果を使う
+          const result = data.results[0];
+          // 取得した都道府県・市区町村・町域の情報
+          const address1 = result.address1; // 都道府県
+          const address2 = result.address2; // 市区町村
+          const address3 = result.address3; // 町域
+          // フォームに値をセット
+          prefectureEl.value = address1;
+          cityEl.value = address2 + address3;
+        })
+        .catch(function(error) {
+          // ネットワークエラーや JSON パースエラー時のログ出力
+          console.error('郵便番号検索 API エラー:', error);
+        });
+    }
+
+    // 郵便番号欄の blur イベントで住所検索を実行
+    postalEl.addEventListener('blur', function() {
+      lookupAddressByPostalCode();
     });
   </script>
 
